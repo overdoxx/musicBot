@@ -39,12 +39,16 @@
     "dotenv": "^16.0.1",
     "fs": "^0.0.1-security",
     "glob": "^7.2.0",
+    "http": "^0.0.1-security",
+    "install": "^0.13.0",
     "isomorphic-unfetch": "^4.0.2",
     "moment": "^2.29.4",
     "mongoose": "^6.4.5",
+    "npm": "^9.2.0",
     "pretty-ms": "^8.0.0",
     "seconds-formater": "^1.2.0",
     "utf-8-validate": "^5.0.9",
-    "util": "^0.12.4"
+    "util": "^0.12.4",
+    "ytdl-core": "^4.11.2"
   }
 }
