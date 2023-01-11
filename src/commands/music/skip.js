@@ -2,7 +2,7 @@ module.exports = class Skip extends Interaction {
     constructor() {
         super({
             name: "skip",
-            description: "Skips the current track",
+            description: "Pula a faixa atual",
         });
     }
 
@@ -13,14 +13,14 @@ module.exports = class Skip extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você deve estar em um canal de voz para usar este comando!`,
                 ephemeral: true,
             });
         if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
                 ephemeral: true,
             });
 
@@ -30,7 +30,7 @@ module.exports = class Skip extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
                 ephemeral: true,
             });
         }
@@ -38,7 +38,7 @@ module.exports = class Skip extends Interaction {
         let queue = this.client.player.getQueue(int.guild.id);
         if (!queue || !queue.nowPlaying)
             return int.reply({
-                content: "There is no music playing in this guild!",
+                content: "Não há música tocando nesta guilda!",
                 ephemeral: true,
             });
 
@@ -50,14 +50,14 @@ module.exports = class Skip extends Interaction {
 
             if (queue.skipVotes.includes(int.user.id)) {
                 return int.reply({
-                    content: "You've already voted to skip the current track!",
+                    content: "Você já votou para pular a faixa atual!",
                     ephemeral: true,
                 });
             }
 
             queue.skipVotes.push(int.user.id);
             int.reply({
-                content: `You voted to skip the current track! **${queue.skipVotes.length}/${required}**`,
+                content: `Você votou para pular a faixa atual! **${queue.skipVotes.length}/${required}**`,
             });
 
             if (queue.skipVotes.length >= required) {
@@ -65,7 +65,7 @@ module.exports = class Skip extends Interaction {
                 let skipped = queue.skip();
 
                 int.channel.send(
-                    `${this.client.emotes.get("skip")} Skipped **${skipped.name}**!`
+                    `${this.client.emotes.get("skip")} Pulada **${skipped.name}**!`
                 );
             }
         } else {
@@ -73,7 +73,7 @@ module.exports = class Skip extends Interaction {
             let skipped = queue.skip();
 
             int.reply({
-                content: `${this.client.emotes.get("skip")} Skipped **${
+                content: `${this.client.emotes.get("skip")} Pulada **${
                     skipped.name
                 }**!`,
                 ephemeral: true,

@@ -7,7 +7,7 @@ module.exports = class Volume extends Interaction {
         {
           type: ApplicationCommandOptionType.Integer,
           name: "value",
-          description: "The value to set the volume to",
+          description: "O valor para definir o volume para",
           required: true,
         },
       ],
@@ -22,14 +22,14 @@ module.exports = class Volume extends Interaction {
       return int.reply({
         content: `${this.client.emotes.get(
           "nomic"
-        )} You must be in a voice channel to use this command!`,
+        )} Você deve estar em um canal de voz para usar este comando!`,
         ephemeral: true,
       });
     if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
       return int.reply({
         content: `${this.client.emotes.get(
           "nomic"
-        )} You must be in the same voice channel as me to use this command!`,
+        )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
         ephemeral: true,
       });
 
@@ -41,7 +41,7 @@ module.exports = class Volume extends Interaction {
       return int.reply({
         content: `${this.client.emotes.get(
           "nomic"
-        )} You must be in one of the allowed voice channels to use this command!`,
+        )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
         ephemeral: true,
       });
     }
@@ -53,21 +53,21 @@ module.exports = class Volume extends Interaction {
     ) {
       return int.reply({
         content:
-          "You must be a DJ or be alone in the voice channel to use this command!",
+          "Você deve ser um DJ ou estar sozinho no canal de voz para usar este comando!",
         ephemeral: true,
       });
     }
 
     if (volume < 0 || volume > 200)
       return int.reply({
-        content: "The volume must be between 0 and 200!",
+        content: "O volume deve estar entre 0 e 200!",
         ephemeral: true,
       });
 
     let hasQueue = this.client.player.hasQueue(int.guild.id);
     if (!hasQueue)
       return int.reply({
-        content: "There is no music playing in this guild!",
+        content: "Não há música tocando nesta guilda!",
         ephemeral: true,
       });
 
@@ -87,7 +87,7 @@ module.exports = class Volume extends Interaction {
     }
 
     return int.reply({
-      content: `${emoji} Set the volume to ${volume}%!`,
+      content: `${emoji} Volume definido para ${volume}%!`,
       ephemeral: true,
     });
   }

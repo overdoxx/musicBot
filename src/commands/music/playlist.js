@@ -4,12 +4,12 @@ module.exports = class Playlist extends Interaction {
     constructor() {
         super({
             name: "playlist",
-            description: "Adds a playlist to the queue",
+            description: "Adiciona uma lista de reprodução à fila",
             options: [
                 {
                     type: ApplicationCommandOptionType.String,
-                    name: "input",
-                    description: "A playlist link",
+                    name: "link",
+                    description: "Link da playlist",
                     required: true,
                 },
             ],
@@ -17,7 +17,7 @@ module.exports = class Playlist extends Interaction {
     }
 
     async exec(int, data) {
-        const playlist = int.options.getString("input");
+        const playlist = int.options.getString("link");
 
         let channel = int.member.voice.channel;
 
@@ -25,14 +25,14 @@ module.exports = class Playlist extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você deve estar em um canal de voz para usar este comando!`,
                 ephemeral: true,
             });
         if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
                 ephemeral: true,
             });
 
@@ -44,7 +44,7 @@ module.exports = class Playlist extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
                 ephemeral: true,
             });
         }
@@ -56,7 +56,7 @@ module.exports = class Playlist extends Interaction {
         ) {
             return int.reply({
                 content:
-                    "You must be a DJ or be alone in the voice channel to use this command!",
+                    "Você deve ser um DJ ou estar sozinho no canal de voz para usar este comando!",
                 ephemeral: true,
             });
         }
@@ -67,7 +67,7 @@ module.exports = class Playlist extends Interaction {
 
         if (!isPlaylist)
             return int.reply({
-                content: "That's not a valid playlist link!",
+                content: "Esse não é um link de lplaylist válido!",
                 ephemeral: true,
             });
 

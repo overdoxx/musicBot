@@ -2,7 +2,7 @@ module.exports = class Pause extends Interaction {
     constructor() {
         super({
             name: "pause",
-            description: "Alternates the pause state of the music player",
+            description: "Alterna o estado de pausa do reprodutor de música",
         });
     }
 
@@ -13,14 +13,14 @@ module.exports = class Pause extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você deve estar em um canal de voz para usar este comando!`,
                 ephemeral: true,
             });
         if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
                 ephemeral: true,
             });
 
@@ -32,7 +32,7 @@ module.exports = class Pause extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
                 ephemeral: true,
             });
         }
@@ -44,7 +44,7 @@ module.exports = class Pause extends Interaction {
         ) {
             return int.reply({
                 content:
-                    "You must be a DJ or be alone in the voice channel to use this command!",
+                    "Você deve ser um DJ ou estar sozinho no canal de voz para usar este comando!",
                 ephemeral: true,
             });
         }
@@ -52,7 +52,7 @@ module.exports = class Pause extends Interaction {
         let hasQueue = this.client.player.hasQueue(int.guild.id);
         if (!hasQueue)
             return int.reply({
-                content: "There is no music playing in this guild!",
+                content: "Não há música tocando nesta guilda!",
                 ephemeral: true,
             });
 
@@ -64,13 +64,13 @@ module.exports = class Pause extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "resume"
-                )} Resumed the music player!`,
+                )} Retomou o reprodutor de música!`,
                 ephemeral: true,
             });
         } else {
             queue.setPaused(true);
             return int.reply({
-                content: `${this.client.emotes.get("pause")} Paused the music player!`,
+                content: `${this.client.emotes.get("pause")} Pausou o reprodutor de música!`,
                 ephemeral: true,
             });
         }

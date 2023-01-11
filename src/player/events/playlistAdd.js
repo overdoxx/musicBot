@@ -66,17 +66,17 @@ module.exports = class PlaylistAdd extends Event {
                         inline: true,
                     },
                     {
-                        name: "Duration",
+                        name: "Duração",
                         value: playlist.duration,
                         inline: true,
                     },
                     {
-                        name: "Estimated time",
+                        name: "Tempo estimado",
                         value: `${timeLeft}`,
                         inline: false
                     },
                     {
-                        name: "Songs",
+                        name: "Sons",
                         value: `${playlist.songs.length}`,
                         inline: true,
                     }

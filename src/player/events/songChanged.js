@@ -28,7 +28,7 @@ module.exports = class SongChanged extends Event {
                     if (data.announcements) {
                         channel
                             .send(
-                                `${client.emotes.get("play")} Started playing **${newSong.name}**`
+                                `${client.emotes.get("play")} Começando a tocar **${newSong.name}**`
                             )
                             .then((m) => {
                                 newSong.playingMessage = m;
@@ -39,7 +39,7 @@ module.exports = class SongChanged extends Event {
                     if (data.announcements) {
                         channel
                             .send(
-                                `${client.emotes.get("play")} Started playing **${newSong.name}**`
+                                `${client.emotes.get("play")} Começando a tocar **${newSong.name}**`
                             )
                             .then((m) => {
                                 newSong.playingMessage = m;

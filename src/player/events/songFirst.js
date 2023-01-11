@@ -16,7 +16,7 @@ module.exports = class SongFirst extends Event {
         if (channel) {
             if (data.announcements) {
                 channel
-                    .send(`${client.emotes.get("play")} Started playing **${song.name}**`)
+                    .send(`${client.emotes.get("play")} Começando a tocar **${song.name}**`)
                     .then((m) => {
                         song.playingMessage = m;
                     });

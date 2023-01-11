@@ -4,7 +4,7 @@ module.exports = class Queue extends Interaction {
     constructor() {
         super({
             name: "queue",
-            description: "Displays the queue of songs",
+            description: "Exibe a fila de músicas",
         });
     }
 
@@ -15,14 +15,14 @@ module.exports = class Queue extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você deve estar em um canal de voz para usar este comando!`,
                 ephemeral: true,
             });
         if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
                 ephemeral: true,
             });
 
@@ -32,7 +32,7 @@ module.exports = class Queue extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
                 ephemeral: true,
             });
         }
@@ -40,7 +40,7 @@ module.exports = class Queue extends Interaction {
         let queue = this.client.player.getQueue(int.guild.id);
         if (!queue || !queue.songs.length)
             return int.reply({
-                content: "There is nothing in the queue!",
+                content: "Não há nada na fila!",
                 ephemeral: true,
             });
 
@@ -78,11 +78,11 @@ module.exports = class Queue extends Interaction {
                     .map((s) => `[${s.index}. ${s.name}](${s.url})`)
                     .join("\n");
                 let emb = new EmbedBuilder()
-                    .setTitle("Songs list")
+                    .setTitle("Lista de músicas")
                     .setColor("#2f3136")
                     .setThumbnail(int.guild.iconURL())
                     .setDescription(
-                        `**Now playing**\n[**${queue.nowPlaying.name}**](${queue.nowPlaying.url})\n\n${songs}`
+                        `**Agora tocando**\n[**${queue.nowPlaying.name}**](${queue.nowPlaying.url})\n\n${songs}`
                     );
                 pages.push(emb);
             });
@@ -98,11 +98,11 @@ module.exports = class Queue extends Interaction {
                 .join("\n");
 
             let emb = new EmbedBuilder()
-                .setTitle("Songs list")
+                .setTitle("Lista de músicas")
                 .setColor("#2f3136")
                 .setThumbnail(int.guild.iconURL())
                 .setDescription(
-                    `**Now playing**\n[**${queue.nowPlaying.name}**](${queue.nowPlaying.url})\n\n${songs}`
+                    `**Agora tocando**\n[**${queue.nowPlaying.name}**](${queue.nowPlaying.url})\n\n${songs}`
                 )
                 .setFooter({text: "Page 1 / 1"});
             return int.reply({embeds: [emb]});

@@ -4,12 +4,12 @@ module.exports = class Search extends Interaction {
     constructor() {
         super({
             name: "search",
-            description: "Searches for a track in YouTube",
+            description: "Pesquisa uma faixa no YouTube",
             options: [
                 {
                     type: ApplicationCommandOptionType.String,
-                    name: "input",
-                    description: "The track name",
+                    name: "nome",
+                    description: "O nome da musica",
                     required: true,
                 },
             ],
@@ -17,7 +17,7 @@ module.exports = class Search extends Interaction {
     }
 
     async exec(int, data) {
-        const input = int.options.getString("input");
+        const input = int.options.getString("nome");
 
         let channel = int.member.voice.channel;
 
@@ -25,14 +25,14 @@ module.exports = class Search extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você deve estar em um canal de voz para usar este comando!`,
                 ephemeral: true,
             });
         if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
                 ephemeral: true,
             });
 
@@ -42,7 +42,7 @@ module.exports = class Search extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
                 ephemeral: true,
             });
         }
@@ -77,15 +77,15 @@ module.exports = class Search extends Interaction {
             }
 
             return int.editReply({
-                content: "No results found!",
+                content: "Nenhum resultado encontrado!",
             });
         }
 
         let emb = new EmbedBuilder()
-            .setTitle("Search Results")
+            .setTitle("Resultado da Pesquisa")
             .setColor("#2f3136")
             .setDescription(
-                `Send the track number\n\n` +
+                `Envie o numero da track\n\n` +
                 results.map((r, i) => `[${i + 1}. ${r.name}](${r.url})`).join("\n")
             );
 
@@ -111,7 +111,7 @@ module.exports = class Search extends Interaction {
 
                 if (!song) {
                     return int.editReply({
-                        content: "No results found!",
+                        content: "Nenhum resultado encontrado!",
                         embeds: [],
                     });
                 }
@@ -130,7 +130,7 @@ module.exports = class Search extends Interaction {
             })
             .catch(() => {
                 return int.editReply({
-                    content: "You took too long to respond!",
+                    content: "Você demorou muito para responder",
                     embeds: [],
                 });
             });

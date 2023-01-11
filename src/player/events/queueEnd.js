@@ -12,7 +12,7 @@ module.exports = class QueueEnd extends Event {
         queue.skipVotes = [];
         if (channel) {
             channel.send(
-                `${client.emotes.get("queue")} Queue ended!`
+                `${client.emotes.get("queue")} Fila de reprodução finalizada!`
             );
         }
     }

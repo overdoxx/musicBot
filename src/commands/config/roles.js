@@ -2,17 +2,17 @@ module.exports = class Roles extends Interaction {
     constructor() {
         super({
             name: "roles",
-            description: "Manage DJ roles",
+            description: "Gerenciar cargos de DJ",
             options: [
                 {
                     type: ApplicationCommandOptionType.Subcommand,
                     name: "add",
-                    description: "Add a role to the DJ roles list",
+                    description: "Adicione um cargo à lista de cargos de DJ",
                     options: [
                         {
                             type: ApplicationCommandOptionType.Role,
                             name: "role",
-                            description: "The role to add",
+                            description: "O cargo a adicionar",
                             required: true,
                         },
                     ]
@@ -20,12 +20,12 @@ module.exports = class Roles extends Interaction {
                 {
                     type: ApplicationCommandOptionType.Subcommand,
                     name: "remove",
-                    description: "Remove a role from the DJ roles list",
+                    description: "Remover um cargo da lista de cargos de DJ",
                     options: [
                         {
                             type: ApplicationCommandOptionType.Role,
                             name: "role",
-                            description: "The role to remove",
+                            description: "O cargo a remover",
                             required: true,
                         },
                     ]
@@ -33,7 +33,7 @@ module.exports = class Roles extends Interaction {
                 {
                     type: ApplicationCommandOptionType.Subcommand,
                     name: "list",
-                    description: "List all DJ roles",
+                    description: "Lista todos os cargos de DJ",
                 },
             ],
         });
@@ -42,7 +42,7 @@ module.exports = class Roles extends Interaction {
     async exec(int, data) {
         if (!int.member.permissions.has("MANAGE_GUILD"))
             return int.reply({
-                content: "You don't have the required permissions to do this!",
+                content: "Você não tem as permissões necessárias para fazer isso!",
                 ephemeral: true,
             });
 
@@ -54,7 +54,7 @@ module.exports = class Roles extends Interaction {
 
             if (role.id === int.guild.id) {
                 return int.reply({
-                    content: "The *everyone* role is not manageable!",
+                    content: "O cargo *everyone* não é gerenciável!",
                     ephemeral: true,
                 });
             }
@@ -62,7 +62,7 @@ module.exports = class Roles extends Interaction {
 
             if (old) {
                 return int.reply({
-                    content: `The role ${role.name} is already in the list!`,
+                    content: `O cargo ${role.name} ja esta na lista!`,
                     ephemeral: true,
                 });
             }
@@ -71,7 +71,7 @@ module.exports = class Roles extends Interaction {
             await data.save();
 
             return int.reply({
-                content: `Added role ${role.name} to the DJ roles list!`,
+                content: `Adicionei o cargo ${role.name} a lista de cargos de DJ!`,
                 ephemeral: true,
             });
         }
@@ -80,7 +80,7 @@ module.exports = class Roles extends Interaction {
 
             if (role.id === int.guild.id) {
                 return int.reply({
-                    content: "The *everyone* role is not manageable!",
+                    content: "O cargo *everyone* não é gerenciavel!",
                     ephemeral: true,
                 });
             }
@@ -89,7 +89,7 @@ module.exports = class Roles extends Interaction {
 
             if (!old)
                 return int.reply({
-                    content: `The role ${role.name} is not in the list!`,
+                    content: `O cargo ${role.name} não esta na lista!`,
                     ephemeral: true,
                 });
 
@@ -98,7 +98,7 @@ module.exports = class Roles extends Interaction {
             await data.save();
 
             return int.reply({
-                content: `Removed role ${role.name} from the DJ roles list!`,
+                content: `Removi o cargo ${role.name} da lista de cargos de DJ!`,
                 ephemeral: true,
             });
         }
@@ -107,12 +107,12 @@ module.exports = class Roles extends Interaction {
 
             if (!djs.length)
                 return int.reply({
-                    content: "There are no DJ roles set!",
+                    content: "Não há cargos de DJ definidos!",
                     ephemeral: true,
                 });
 
             let emb = new EmbedBuilder()
-                .setTitle("DJ Roles list")
+                .setTitle("Lista de cargos de DJ")
                 .setThumbnail(int.guild.iconURL({size: 2048}))
                 .setColor("#2f3136")
                 .setDescription(`${djs.map((m) => `<@&${m}>`).join(" ")}`)

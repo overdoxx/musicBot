@@ -11,7 +11,7 @@ module.exports = class QueueDestroyed extends Event {
 
         if (channel) {
             channel.send(
-                `${client.emotes.get("queue")} Queue ended!`
+                `${client.emotes.get("queue")} Fila terminada!`
             );
         }
     }

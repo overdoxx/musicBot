@@ -2,7 +2,7 @@ module.exports = class Stop extends Interaction {
     constructor() {
         super({
             name: "stop",
-            description: "Stops the music player",
+            description: "Para o reprodutor de música",
         });
     }
 
@@ -12,14 +12,14 @@ module.exports = class Stop extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você deve estar em um canal de voz para usar este comando!`,
                 ephemeral: true,
             });
         if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
                 ephemeral: true,
             });
 
@@ -31,7 +31,7 @@ module.exports = class Stop extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
                 ephemeral: true,
             });
         }
@@ -43,7 +43,7 @@ module.exports = class Stop extends Interaction {
         ) {
             return int.reply({
                 content:
-                    "You must be a DJ or be alone in the voice channel to use this command!",
+                    "Você deve ser um DJ ou estar sozinho no canal de voz para usar este comando!",
                 ephemeral: true,
             });
         }
@@ -51,14 +51,14 @@ module.exports = class Stop extends Interaction {
         let queue = this.client.player.getQueue(int.guild.id);
         if (!queue)
             return int.reply({
-                content: "There is no music playing in this guild!",
+                content: "Não há música tocando neste servidor!",
                 ephemeral: true,
             });
 
         queue.stop();
 
         return int.reply({
-            content: `${this.client.emotes.get("stop")} Stopped the music player!`,
+            content: `${this.client.emotes.get("stop")} Parou o reprodutor de música!`,
             ephemeral: true,
         });
     }

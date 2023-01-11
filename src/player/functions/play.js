@@ -27,12 +27,12 @@ module.exports = async function play(
 
         if (search) {
             return int.editReply({
-                content: `${client.emotes.get("nomic")} I couldn't join the voice channel.`,
+                content: `${client.emotes.get("nomic")} não consegui entrar no canal de voz.`,
                 embeds: [],
             });
         } else {
             return int.reply({
-                content: `${client.emotes.get("nomic")} I couldn't join the voice channel!`,
+                content: `${client.emotes.get("nomic")} Não consegui entrar no canal de voz!`,
                 ephemeral: true,
             });
         }
@@ -40,7 +40,7 @@ module.exports = async function play(
 
     if (!search && !last) {
         int.reply(
-            `${client.emotes.get("search")} Searching \`${input}\` ${client.emotes.get(`${source}`)}`
+            `${client.emotes.get("search")} Procurando \`${input}\` ${client.emotes.get(`${source}`)}`
         );
     }
 
@@ -71,7 +71,7 @@ module.exports = async function play(
                         queue.stop();
                     }
                 });
-            if (!song) return int.channel.send(`${client.emotes.get("notfound")} No track found!`);
+            if (!song) return int.channel.send(`${client.emotes.get("notfound")} Nenhuma trilha encontrada!`);
             queue.skip()
         } else {
             let song = await queue.play(input, {requestedBy: int.user}).catch((_, err) => {
@@ -82,7 +82,7 @@ module.exports = async function play(
                     queue.stop();
                 }
             });
-            if (!song) return int.channel.send(`${client.emotes.get("notfound")} No track found!`);
+            if (!song) return int.channel.send(`${client.emotes.get("notfound")} Nenhuma trilha encontrada!`);
         }
 
     }

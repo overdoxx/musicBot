@@ -4,18 +4,18 @@ module.exports = class Play extends Interaction {
     constructor() {
         super({
             name: "play",
-            description: "Adds a song to the queue",
+            description: "Adiciona uma música à fila",
             options: [
                 {
                     type: ApplicationCommandOptionType.String,
-                    name: "input",
-                    description: "The search term or a link",
+                    name: "musica",
+                    description: "O termo de pesquisa ou um link",
                     required: true,
                 },
                 {
                     type: ApplicationCommandOptionType.Boolean,
                     name: "force",
-                    description: "Directly play the song",
+                    description: "Tocar a música diretamente",
                     required: false,
                 },
             ],
@@ -23,7 +23,7 @@ module.exports = class Play extends Interaction {
     }
 
     async exec(int, data) {
-        const song = int.options.getString("input");
+        const song = int.options.getString("musica");
         const force = int.options.getBoolean("force");
 
         let channel = int.member.voice.channel;
@@ -32,14 +32,14 @@ module.exports = class Play extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você deve estar em um canal de voz para usar este comando!`,
                 ephemeral: true,
             });
         if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
                 ephemeral: true,
             });
 
@@ -51,7 +51,7 @@ module.exports = class Play extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
                 ephemeral: true,
             });
         }
@@ -64,7 +64,7 @@ module.exports = class Play extends Interaction {
         ) {
             return int.reply({
                 content:
-                    "You must be a DJ or be alone in the voice channel to use the force function!",
+                    "Você deve ser DJ ou estar sozinho no canal de voz para usar a função force!",
                 ephemeral: true,
             });
         }

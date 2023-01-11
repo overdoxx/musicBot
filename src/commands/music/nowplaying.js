@@ -6,7 +6,7 @@ module.exports = class NowPlaying extends Interaction {
     constructor() {
         super({
             name: "nowplaying",
-            description: "Displays the current playing track",
+            description: "Exibe a faixa de reprodução atual",
         });
     }
 
@@ -17,14 +17,14 @@ module.exports = class NowPlaying extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você deve estar em um canal de voz para usar este comando!`,
                 ephemeral: true,
             });
         if (int.guild.members.me.voice.channel && channel !== int.guild.members.me.voice.channel)
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você deve estar no mesmo canal de voz que eu para usar este comando!`,
                 ephemeral: true,
             });
 
@@ -34,7 +34,7 @@ module.exports = class NowPlaying extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você deve estar em um dos canais de voz permitidos para usar este comando!`,
                 ephemeral: true,
             });
         }
@@ -42,7 +42,7 @@ module.exports = class NowPlaying extends Interaction {
         let hasQueue = this.client.player.hasQueue(int.guild.id);
         if (!hasQueue) {
             return int.reply({
-                content: "There is no music playing in this guild!",
+                content: "Não há música tocando nesta guilda!",
                 ephemeral: true,
             });
         }
@@ -52,7 +52,7 @@ module.exports = class NowPlaying extends Interaction {
         let song = queue.nowPlaying;
         if (!song) {
             return int.reply({
-                content: "There is no music playing in this guild!",
+                content: "Não há música tocando nesta guilda!",
                 ephemeral: true,
             });
         }

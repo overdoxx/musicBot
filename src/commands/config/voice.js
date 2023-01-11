@@ -7,12 +7,12 @@ module.exports = class Voice extends Interaction {
                 {
                     type: ApplicationCommandOptionType.Subcommand,
                     name: "add",
-                    description: "Add a voice channel to the allowed list",
+                    description: "Adicionar um canal de voz à lista permitida",
                     options: [
                         {
                             type: ApplicationCommandOptionType.Channel,
                             name: "channel",
-                            description: "The voice channel to add",
+                            description: "O canal de voz a adicionar",
                             required: true,
                         },
                     ]
@@ -20,12 +20,12 @@ module.exports = class Voice extends Interaction {
                 {
                     type: ApplicationCommandOptionType.Subcommand,
                     name: "remove",
-                    description: "Remove a voice channel from the allowed list",
+                    description: "Remover um canal de voz da lista permitida",
                     options: [
                         {
                             type: ApplicationCommandOptionType.Channel,
                             name: "channel",
-                            description: "The voice channel to remove",
+                            description: "O canal de voz a ser removido",
                             required: true,
                         },
                     ]
@@ -33,7 +33,7 @@ module.exports = class Voice extends Interaction {
                 {
                     type: ApplicationCommandOptionType.Subcommand,
                     name: "list",
-                    description: "List the allowed voice channels",
+                    description: "Listar os canais de voz permitidos",
                 },
             ],
         });
@@ -42,7 +42,7 @@ module.exports = class Voice extends Interaction {
     async exec(int, data) {
         if (!int.member.permissions.has("MANAGE_GUILD"))
             return int.reply({
-                content: "You don't have the required permissions to do this!",
+                content: "Você não tem as permissões necessárias para fazer isso!",
                 ephemeral: true,
             });
 
@@ -56,7 +56,7 @@ module.exports = class Voice extends Interaction {
                 channel.type !== ChannelType.GuildStageVoice
             ) {
                 return int.reply({
-                    content: "You can only add voice channels to the allowed list!",
+                    content: "Você só pode adicionar canais de voz à lista permitida!",
                     ephemeral: true,
                 });
             }
@@ -65,7 +65,7 @@ module.exports = class Voice extends Interaction {
 
             if (old) {
                 return int.reply({
-                    content: `The channel ${channel.name} is already in the allowed list!`,
+                    content: `O canal ${channel.name} já está na lista de permitidos!`,
                     ephemeral: true,
                 });
             }
@@ -74,7 +74,7 @@ module.exports = class Voice extends Interaction {
             await data.save();
 
             return int.reply({
-                content: `The channel ${channel.name} has been added to the allowed list!`,
+                content: `O canal ${channel.name} foi adicionado à lista de permitidos!`,
                 ephemeral: true,
             });
         }
@@ -86,7 +86,7 @@ module.exports = class Voice extends Interaction {
                 channel.type !== ChannelType.GuildStageVoice
             ) {
                 return int.reply({
-                    content: "You can only add voice channels to the allowed list!",
+                    content: "Você só pode adicionar canais de voz à lista permitida!",
                     ephemeral: true,
                 });
             }
@@ -95,7 +95,7 @@ module.exports = class Voice extends Interaction {
 
             if (!old) {
                 return int.reply({
-                    content: `The channel ${channel.name} is not in the allowed list!`,
+                    content: `O canal ${channel.name} não está na lista de permitidos!`,
                     ephemeral: true,
                 });
             }
@@ -105,7 +105,7 @@ module.exports = class Voice extends Interaction {
             await data.save();
 
             return int.reply({
-                content: `The channel ${channel.name} has been removed from the allowed list!`,
+                content: `O canal ${channel.name} foi removido da lista de permitidos!`,
                 ephemeral: true,
             });
         }
@@ -114,13 +114,13 @@ module.exports = class Voice extends Interaction {
 
             if (!vcs.length) {
                 return int.reply({
-                    content: "There are no voice channels in the allowed list!",
+                    content: "Não há canais de voz na lista permitida!",
                     ephemeral: true,
                 });
             }
 
             let emb = new EmbedBuilder()
-                .setTitle("Allowed voice channels")
+                .setTitle("Canais de voz permitidos")
                 .setThumbnail(int.guild.iconURL({size: 2048}))
                 .setColor("#2f3136")
                 .setDescription(`${vcs.map((m) => `<#${m}>`).join(" ")}`)

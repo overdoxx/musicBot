@@ -4,12 +4,12 @@ module.exports = class Loop extends Interaction {
     constructor() {
         super({
             name: "loop",
-            description: "Changes the loop mode",
+            description: "Define um loop, ou não",
             options: [
                 {
                     type: ApplicationCommandOptionType.String,
                     name: "mode",
-                    description: "Loop mode",
+                    description: "Loop",
                     required: true,
                     choices: [
                         {
@@ -21,8 +21,8 @@ module.exports = class Loop extends Interaction {
                             value: "queue",
                         },
                         {
-                            name: "disabled",
-                            value: "disabled",
+                            name: "disable",
+                            value: "disable",
                         },
                     ],
                 },
@@ -38,7 +38,7 @@ module.exports = class Loop extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in a voice channel to use this command!`,
+                )} Você precisa estar em um canal de voz para usar esse comando!`,
                 ephemeral: true,
             });
 
@@ -46,7 +46,7 @@ module.exports = class Loop extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in the same voice channel as me to use this command!`,
+                )} Você precisa estar no mesmo canal de voz que euzinho :3 para usar esse comando!`,
                 ephemeral: true,
             });
 
@@ -58,7 +58,7 @@ module.exports = class Loop extends Interaction {
             return int.reply({
                 content: `${this.client.emotes.get(
                     "nomic"
-                )} You must be in one of the allowed voice channels to use this command!`,
+                )} Você precisa estar em um canal de voz permitido para tocar musicas`,
                 ephemeral: true,
             });
         }
@@ -66,7 +66,7 @@ module.exports = class Loop extends Interaction {
         if (members.size > 1 && !isDJ && !int.member.permissions.has("MANAGE_GUILD")) {
             return int.reply({
                 content:
-                    "You must be a DJ or be alone in the voice channel to use this command!",
+                    "Você precisa ser um DJ ou estar sozinho no canal para usar esse comando!",
                 ephemeral: true,
             });
         }
@@ -74,7 +74,7 @@ module.exports = class Loop extends Interaction {
         let hasQueue = this.client.player.hasQueue(int.guild.id);
         if (!hasQueue) {
             return int.reply({
-                content: "There is no music playing in this guild!",
+                content: "Não há música tocando neste servidor",
                 ephemeral: true,
             });
         }
@@ -84,7 +84,7 @@ module.exports = class Loop extends Interaction {
         if (mode === "track") {
             if (queue.repeatMode === RepeatMode.SONG) {
                 return int.reply({
-                    content: "The current track is alredy looped!",
+                    content: "A faixa atual já está em loop!",
                     ephemeral: true,
                 });
             } else {
@@ -92,14 +92,14 @@ module.exports = class Loop extends Interaction {
                 return int.reply({
                     content: `${this.client.emotes.get(
                         "looped"
-                    )} Looped the current track!`,
+                    )} Repetiu a faixa atual!`,
                     ephemeral: true,
                 });
             }
         } else if (mode === "queue") {
             if (queue.repeatMode === RepeatMode.QUEUE) {
                 return int.reply({
-                    content: "The current queue is already looped!",
+                    content: "A fila atual já está em loop!",
                     ephemeral: true,
                 });
             } else {
@@ -107,14 +107,14 @@ module.exports = class Loop extends Interaction {
                 return int.reply({
                     content: `${this.client.emotes.get(
                         "looped"
-                    )} Looped the current queue!`,
+                    )} Repetiu a fila atual!`,
                     ephemeral: true,
                 });
             }
         } else if (mode === "disabled") {
             if (queue.repeatMode === RepeatMode.DISABLED) {
                 return int.reply({
-                    content: "The loop mode is already disabled!",
+                    content: "O modo loop já está desativado!",
                     ephemeral: true,
                 });
             } else {
@@ -122,7 +122,7 @@ module.exports = class Loop extends Interaction {
                 return int.reply({
                     content: `${this.client.emotes.get(
                         "noloop"
-                    )} Disabled the loop mode!`,
+                    )} Desativou o modo loop!`,
                     ephemeral: true,
                 });
             }

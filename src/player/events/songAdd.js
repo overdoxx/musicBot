@@ -57,12 +57,12 @@ module.exports = class SongAdd extends Event {
                             inline: true,
                         },
                         {
-                            name: "Duration",
+                            name: "Duração",
                             value: song.isLive ? "Live" : song.duration,
                             inline: true,
                         },
                         {
-                            name: "Estimated time",
+                            name: "Tempo estimado",
                             value: `Now`,
                             inline: true
                         },
@@ -81,12 +81,12 @@ module.exports = class SongAdd extends Event {
                             inline: true,
                         },
                         {
-                            name: "Duration",
+                            name: "Duração",
                             value: song.isLive ? "Live" : song.duration,
                             inline: true,
                         },
                         {
-                            name: "Estimated time",
+                            name: "Tempo estimado",
                             value: `${timeLeft}`,
                             inline: true
                         },
@@ -95,7 +95,7 @@ module.exports = class SongAdd extends Event {
                 if ((queue.songs.length - 1) !== 0) {
                     emb.addFields(
                         {
-                            name: "Position in queue",
+                            name: "Posição na fila",
                             value: `${queue.songs.length - 1}`,
                             inline: false
                         })

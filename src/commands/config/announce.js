@@ -2,12 +2,12 @@ module.exports = class Announce extends Interaction {
     constructor() {
         super({
             name: "announce",
-            description: "Toggles whether to send the started playing message",
+            description: "Alterna se deseja enviar a mensagem de reprodução iniciada",
             options: [
                 {
                     type: ApplicationCommandOptionType.Boolean,
                     name: "mode",
-                    description: "Whether to send the started playing message",
+                    description: "Se deve enviar a mensagem de reprodução iniciada",
                     required: true
                 }
             ],
@@ -17,7 +17,7 @@ module.exports = class Announce extends Interaction {
     async exec(int, data) {
         if (!int.member.permissions.has("MANAGE_GUILD"))
             return int.reply({
-                content: "You don't have the required permissions to do this!",
+                content: "Você não tem as permissões necessárias para fazer isso!",
                 ephemeral: true,
             });
 
@@ -26,7 +26,7 @@ module.exports = class Announce extends Interaction {
         if (mode === true) {
             if (data.announcements) {
                 return int.reply({
-                    content: "The announcements are already enabled!",
+                    content: "Os anúncios já estão habilitados!",
                     ephemeral: true,
                 });
             }
@@ -35,14 +35,14 @@ module.exports = class Announce extends Interaction {
             await data.save();
 
             int.reply({
-                content: "Announcements are now enabled!",
+                content: "Os anúncios agora estão ativados!",
                 ephemeral: true,
             });
         } else {
 
             if (!data.announcements) {
                 return int.reply({
-                    content: "The announcements are already disabled!",
+                    content: "Os anúncios já estão desativados!",
                     ephemeral: true,
                 });
             }
@@ -51,7 +51,7 @@ module.exports = class Announce extends Interaction {
             await data.save();
 
             int.reply({
-                content: "Announcements are now disabled!",
+                content: "Os anúncios agora estão desativados!",
                 ephemeral: true,
             });
         }

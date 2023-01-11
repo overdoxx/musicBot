@@ -7,7 +7,7 @@ module.exports = class Ready extends Event {
     }
 
     async exec() {
-        this.client.user.setActivity("/play", {type: ActivityType.Watching});
+        this.client.user.setActivity("SlashCommand (/) | /play", {type: ActivityType.Watching});
 
         let allMembers = new Set();
         this.client.guilds.cache.forEach((guild) => {
