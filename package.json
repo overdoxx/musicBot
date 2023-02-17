@@ -43,7 +43,7 @@
     "install": "^0.13.0",
     "isomorphic-unfetch": "^4.0.2",
     "moment": "^2.29.4",
-    "mongoose": "^6.4.5",
+    "mongoose": "^6.9.2",
     "npm": "^9.2.0",
     "pretty-ms": "^8.0.0",
     "seconds-formater": "^1.2.0",
